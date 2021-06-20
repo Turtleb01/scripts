@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#give argument to youtube-dl: if it doesn't work, just pass the argument
+STREAM=$(youtube-dl -g -f "best" "$1" 2>/dev/null) || STREAM="$1"
+#echo "$STREAM"
+
+A_OPTS=""
+(ffprobe -show_streams -v quiet "$STREAM" |grep -q "codec_type=audio") && A_OPTS="-f s16le -vn -ar 16000 -ac 1 /tmp/virtmic"
+
+[ ! -e "/tmp/virtmic" ] && [ -n "$A_OPTS" ] && pactl load-module module-pipe-source source_name=virtmic file=/tmp/virtmic format=s16le rate=16000 channels=1
+
+[ ! -e "/sys/module/v4l2loopback" ] && sudo modprobe v4l2loopback
+#let's just assume that the last video device is the virtual one
+WEBCAM="$(find /dev/video* |tail -n1)"
+#give the user permission to write to the virtual webcam
+[ ! -w "$WEBCAM" ] && sudo chown "$(whoami)" "$WEBCAM" && sudo chmod u+rw "$WEBCAM"
+
+ffmpeg -hide_banner -y -re -sn -i "$STREAM" \
+  -r 30 -vcodec rawvideo -an -pix_fmt yuv420p -vf "scale=-1:720" \
+  -f v4l2 -threads 0 /dev/video2 \
+  $A_OPTS
+
+#cleanup:
+#pactl unload-module module-pipe-source
+#sudo modprobe -r v4l2loopback

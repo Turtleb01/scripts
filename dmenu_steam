@@ -1,0 +1,4 @@
+#!/bin/bash
+GAMELIST="$(steamcmd +apps_installed +quit 2>/dev/null |grep -E "^AppID" |grep -vE -e "\"Steam Linux Runtime" -e "\"Steamworks" -e "\"Proton")"
+GAME="$(grep -Eo "\".*\"" <<<"$GAMELIST" |tr -d "\"" |dmenu -i -l 30)"
+grep "\"$GAME\"" <<<"$GAMELIST" |cut -d ' ' -f2 | xargs -I '{}' steam "steam://run/{}"

@@ -15,9 +15,9 @@ WEBCAM="$(find /dev/video* |tail -n1)"
 #give the user permission to write to the virtual webcam
 [ ! -w "$WEBCAM" ] && sudo chown "$(whoami)" "$WEBCAM" && sudo chmod u+rw "$WEBCAM"
 
-ffmpeg -hide_banner -y -re -sn -i "$STREAM" \
-  -r 30 -vcodec rawvideo -an -pix_fmt yuv420p -vf "scale=-1:720" \
-  -f v4l2 -threads 0 /dev/video2 \
+ffmpeg -hide_banner -y -re -loop 1 -sn -i "$STREAM" \
+  -r 30 -vcodec rawvideo -an -pix_fmt yuv420p  -vf "scale=-1:720" \
+  -f v4l2 -threads 0 "$WEBCAM" \
   $A_OPTS
 
 #cleanup:

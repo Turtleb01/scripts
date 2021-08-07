@@ -20,7 +20,9 @@ echo üäö |./uhex
 
 Warning: there is absolutely no error checking, all kinds of problems are possible with incorrect input. I recommend using proper libraries for bigger projects.
 
-## dmenu_steam
+## dmenu_steam (currently broken)
+
+### After Steam's downloads page update, steamcmd hasn't been able to find games from secondary library folders.
 
 dmenu_steam is a bash script that can be used to launch Steam games without opening your Steam library. You can bind it to a hotkey in your window manager of choice.
 

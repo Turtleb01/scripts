@@ -1,0 +1,6 @@
+#!/bin/sh
+#Why does this exist?
+# - you can run it with dmenu/rofi/keybind
+# - i can actually remember the name
+
+xcolor | xclip -rmlastnl -selection clipboard

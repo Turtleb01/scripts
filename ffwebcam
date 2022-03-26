@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #give argument to youtube-dl: if it doesn't work, just pass the argument
-STREAM=$(youtube-dl -g -f "best" "$1" 2>/dev/null) || STREAM="$1"
+STREAM=$(youtube-dl -4 -g -f "best" "$1" 2>/dev/null) || STREAM="$1"
 #echo "$STREAM"
 
 A_OPTS=""
@@ -15,7 +15,7 @@ WEBCAM="$(find /dev/video* |tail -n1)"
 #give the user permission to write to the virtual webcam
 [ ! -w "$WEBCAM" ] && sudo chown "$(whoami)" "$WEBCAM" && sudo chmod u+rw "$WEBCAM"
 
-ffmpeg -hide_banner -y -re -loop 1 -sn -i "$STREAM" \
+ffmpeg -hide_banner -y -re -sn -i "$STREAM" \
   -r 30 -vcodec rawvideo -an -pix_fmt yuv420p  -vf "scale=-1:720" \
   -f v4l2 -threads 0 "$WEBCAM" \
   $A_OPTS

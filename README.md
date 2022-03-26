@@ -30,6 +30,18 @@ Dependencies: steam (of course), [dmenu](https://tools.suckless.org/dmenu/) and 
 
 Steamcmd is somewhat inconsistent, and might freeze. When that happens, killall steamcmd, start steam normally to make sure it is updated and try again.
 
+## teams-chromium and discord-chromium
+
+Run proprietary web apps inside chromium or (preferably) ungoogled-chromium. Websites in Chromium are completely containerized and don't have access to local files, unlike Electron apps. These two also have significantly lower memory and CPU usage.
+
+### teams-chromium
+
+Startup is 5-10s faster than the official Electron app. You need to enable 3rd party cookies for this to work: open teams in a normal Chromium tab and press the eye icon on the right side of the search bar. Haven't noticed any missing features or bugs in my brief testing.
+
+### discord-chromium
+
+Startup is a couple of seconds faster than the official Electron app. Some features are missing: hotkeys, volumes over 100%.
+
 ## ffwebcam
 
 Stream local videos, online videos with youtube-dl or even streams to virtual webcam and microphone devices. Tested with Discord, but should in theory work with other applications like Zoom or Teams as well.

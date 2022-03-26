@@ -1,0 +1,2 @@
+#!/bin/sh
+exec chromium --app="https://teams.microsoft.com/_#/school/teams-grid/General"

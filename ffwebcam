@@ -5,7 +5,7 @@ STREAM=$(youtube-dl -4 -g -f "best" "$1" 2>/dev/null) || STREAM="$1"
 #echo "$STREAM"
 
 A_OPTS=""
-(ffprobe -show_streams -v quiet "$STREAM" |grep -q "codec_type=audio") && A_OPTS="-f s16le -vn -ar 16000 -ac 1 /tmp/virtmic"
+#(ffprobe -show_streams -v quiet "$STREAM" |grep -q "codec_type=audio") && A_OPTS="-f s16le -vn -ar 16000 -ac 1 /tmp/virtmic"
 
 [ ! -e "/tmp/virtmic" ] && [ -n "$A_OPTS" ] && pactl load-module module-pipe-source source_name=virtmic file=/tmp/virtmic format=s16le rate=16000 channels=1
 

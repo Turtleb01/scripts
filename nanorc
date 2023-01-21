@@ -1,0 +1,72 @@
+set afterends
+unset mouse
+set softwrap
+set atblanks
+set autoindent
+unset backup
+#set backupdir "~/.cache/nano"
+set nohelp
+set quickblank
+set tabsize 8
+set fill 80
+set multibuffer
+
+include /usr/share/nano/*.nanorc
+#include /usr/share/nano-syntax-highlighting/*.nanorc
+
+unbind ^B all #back
+unbind ^F all #forward
+unbind ^H all #backspace
+#unbind ^I all #tab
+unbind ^L all #refresh
+unbind ^N all #down
+unbind ^P all #up
+unbind ^Q main #wherewas
+unbind ^R main #read file
+unbind ^V all #pgdn
+unbind ^W all #whereis
+unbind ^Y all #pgup
+unbind ^Z all #suspend
+unbind ^Space all #word forward
+unbind ^\ all #default replace
+unbind M-F all #extcmd
+unbind M-G all #move to location
+#unbind M-N all #line numbers
+#unbind M-R all #
+unbind M-S all #smart home
+unbind M-X all #help
+unbind M-Z all #suspend toggle (why tho)
+unbind M-3 all
+unbind M-Space all #word backward
+unbind M-: all #default recordmacro
+unbind M-; all #default runmacro
+unbind F1 all #help text
+unbind F2 all #exit
+unbind F3 all #save
+unbind F4 all #justify (tasaa)
+unbind F5 all #insert
+
+bind F5 refresh all
+bind ^L gotoline all
+bind F4 suspend all
+bind ^Z undo all
+bind M-Z redo all
+bind ^Y copy all
+bind M-Space copy all
+bind ^Space mark all
+bind F1 recordmacro all
+bind F2 runmacro all
+bind ^B findprevious all
+bind ^N findnext all
+bind M-N linenumbers all
+bind M-G nohelp all
+bind ^W chopwordleft all
+bind ^H chopwordleft all
+bind ^V paste all
+bind ^R replace main
+bind ^D comment all
+bind ^F whereis all
+bind M-F wherewas all
+bind F3 insert all
+bind ^Q insert all
+bind ^P formatter all
